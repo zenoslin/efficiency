@@ -1,0 +1,56 @@
+//一般用于设置元素的width,left数值
+@function vw($w, $vpw: 750) {
+  // $w: 设计图上元素宽度度的px值；$vpw：设计图的页面宽度的px值
+  @return round($w/ $vpw * 10000) / 100 * 1vw;
+}
+
+//一般用于设置元素的top数值,元素的top相对于高度适配；
+@function vh($h, $vph: 1650) {
+  // $h: 设计图上元素高度的px值；$vph：设计图的页面高度的px值
+  @return round($h / $vph * 10000) / 100 * 1vh;
+}
+
+@mixin abs_full_page {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+@mixin abs_both_middle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+@mixin abs_horizontal_middle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin abs_vertical_middle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin clearBtnDefault() {
+  border: 0;
+  background-color: transparent;
+}
+
+@mixin loadBgImg($url, $position: center, $size: contain, $repeat: no-repeat) {
+  background-image: $url;
+  background-position: $position;
+  background-size: $size;
+  background-repeat: $repeat;
+}
+
+@mixin textArea {
+  white-space: pre-line;
+  word-wrap: break-word;
+  word-break: break-all;
+}
