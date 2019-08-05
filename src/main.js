@@ -1,4 +1,5 @@
-import './colorui/main.wxss';
+import './css/webgradients.css';
+import './css/main.wxss';
 
 import Vue from 'vue';
 import App from './App';

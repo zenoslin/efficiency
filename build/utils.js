@@ -43,7 +43,7 @@ exports.cssLoaders = function(options) {
   var sassResourceLoader = {
     loader: 'sass-resources-loader',
     options: {
-      resources: [path.resolve(__dirname, '../src/scss/mixin.scss')]
+      resources: [path.resolve(__dirname, '../src/scss/mixin.scss')],
     }
   };
 
@@ -58,7 +58,7 @@ exports.cssLoaders = function(options) {
         })
       });
       if ('sass' === loader) {
-        loaders.push(sassResourceLoader)
+        loaders.push(sassResourceLoader);
       }
     }
 
