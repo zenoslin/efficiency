@@ -13,9 +13,9 @@
       <div class="card night_fade" @click="handleAverage">
         <div class="card-name">拼单计算器</div>
       </div>
-      <!-- <div class="card spring_warmth" @click="handleAverage">
-        <div class="card-name">拼单计算器</div>
-      </div>-->
+      <div class="card lady_lips" @click="handleGradient">
+        <div class="card-name">渐变配色盘</div>
+      </div>
     </div>
   </div>
 </template>
@@ -37,6 +37,9 @@ export default {
     },
     handleAverage() {
       wx.navigateTo({ url: '/pages/average/main' });
+    },
+    handleGradient() {
+      wx.navigateTo({ url: '/pages/gradient/main' });
     }
   }
 };

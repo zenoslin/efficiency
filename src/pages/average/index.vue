@@ -4,7 +4,7 @@
       <div class="average-icon night_fade"></div>
     </div>
     <div class="flex padding justify-center">
-      <div class="average-name">计算器</div>
+      <div class="average-name">拼单计算器</div>
     </div>
     <div class="width90">
       <div v-for="(item, index) in personInfo" :key="index" class="flex">
@@ -14,18 +14,18 @@
             用户{{index + 1}}
           </p>
         </div>
-        <div class="flex-treble margin-xs solid inputcard-input">
-          <input type="text" v-model="item.cost" placeholder="请输入金额" />
+        <div class="flex-treble margin-xs solid inputcard-right">
+          <input class="inputcard-right-input" type="digit" v-model="item.cost" placeholder="请输入金额" />
         </div>
       </div>
     </div>
     <div class="flex padding justify-around">
-      <button class="average-btn-person night_fade" @click="handleDecrease">
-        <p class="btn-text-decrease">-</p>
-      </button>
-      <button class="average-btn-person night_fade" @click="handleIncrease">
-        <p class="btn-text-increase">+</p>
-      </button>
+      <div class="average-btn-person night_fade" @click="handleDecrease">
+        <div class="btn-text-decrease">-</div>
+      </div>
+      <div class="average-btn-person night_fade" @click="handleIncrease">
+        <div class="btn-text-increase">+</div>
+      </div>
     </div>
     <div class="width90">
       <div class="flex">
@@ -35,8 +35,8 @@
             支出
           </p>
         </div>
-        <div class="flex-treble margin-xs solid inputcard-input">
-          <input type="text" v-model="realCost" placeholder="请输入金额" />
+        <div class="flex-treble margin-xs solid inputcard-right">
+          <input class="inputcard-right-input" type="digit" v-model="realCost" placeholder="请输入金额" />
         </div>
       </div>
     </div>
@@ -48,7 +48,7 @@
         <div class="inputcard-name">
           <p>
             <span class="text-icon night_fade"></span>
-            用户{{index + 1}}应支付{{item.cost}}
+            用户{{index + 1}}应支付¥{{item.cost}}
           </p>
         </div>
       </div>
@@ -120,11 +120,16 @@ export default {
     line-height: vw(60);
     color: #a18cd1;
   }
-  &-input {
+  &-right {
+    position: relative;
     padding: vw(6);
     text-align: center;
     border-radius: vw(36);
     color: #a18cd1;
+    &-input {
+      width: 100%;
+      @include abs_both_middle();
+    }
   }
 }
 .text-icon {
@@ -141,8 +146,7 @@ export default {
     height: vw(80);
     border-radius: 50%;
     border: 0;
-    font-size: vw(80);
-    color: #fff;
+    position: relative;
   }
   &-confirm {
     width: vw(300);
@@ -158,12 +162,19 @@ export default {
   margin-right: 5%;
 }
 .btn-text-increase {
-  @include abs_both_middle();
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate3d(-50%, -50%, 0);
+  font-size: vw(80);
+  color: #fff;
 }
 .btn-text-decrease {
   position: absolute;
   left: 50%;
   top: 40%;
   transform: translate3d(-50%, -50%, 0);
+  font-size: vw(80);
+  color: #fff;
 }
 </style>

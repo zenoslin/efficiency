@@ -1,14 +1,14 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/logs/main",
     "pages/average/main",
-    "pages/about/main"
+    "pages/about/main",
+    "pages/gradient/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "效率+",
     "navigationBarTextStyle": "black"
   }
 }
