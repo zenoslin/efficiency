@@ -1,0 +1,22 @@
+<view class="container about">
+  <view class="flex justify-center">
+    <view class="about-icon everlasting_sky"></view>
+  </view>
+  <view class="flex padding justify-center">
+    <view class="about-name">{{about.name}}</view>
+  </view>
+  <view class="margin">
+    <view class="flex padding-bottom justify-center">
+      <view class="about-desc">{{about.desc}}</view>
+    </view>
+    <view class="flex padding-bottom justify-center">
+      <view class="about-desc">{{about.text}}</view>
+    </view>
+    <view class="flex padding-bottom justify-center">
+      <view class="about-email">{{about.email}}</view>
+    </view>
+    <view class="flex padding-bottom justify-center">
+      <view class="about-github">{{about.github}}</view>
+    </view>
+  </view>
+</view>

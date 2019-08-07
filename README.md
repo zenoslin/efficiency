@@ -1,11 +1,26 @@
 # efficiency+
 
 > a mini-program for raise efficiency
+>
 > 一款增加生活效率的小程序
+
+## 介绍
+
+这是一个简单的小程序，本意是制作一些小工具来提高生活效率，方便日常使用。
+
+技术栈`原生小程序` `微信云开发`，其中部分样式使用了[colorUI](https://github.com/weilanwl/ColorUI)和[WebGradients](https://github.com/itmeo/webgradients)。
+
+> 第一版使用了 mpvue，但是开发过程出现了不支持 vue 某些语法，没有文档的情况下排查错误耗费了大量时间。
+>
+> 所以，考量到这是一个轻小程序，并且使用原生框架促进自己学习，便使用原生框架重写了这个小程序。
+>
+> 后续可能会了解 `wepy`或者 `taro`再去修改技术栈。
+>
+> mpvue 的代码迁移到了[mpvue 分支](https://github.com/zenoslin/efficiency/tree/mpvue)
 
 ![qrcode.png](https://github.com/zenoslin/efficiency/blob/master/img/qrcode.png)
 
-## tools
+## Tools
 
 制作了一些（沙雕）的小工具，提高（我的）生活效率
 

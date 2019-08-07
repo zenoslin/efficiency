@@ -1,0 +1,22 @@
+<view class="container gradient">
+    <view class="flex justify-center">
+      <view class="gradient-icon lady_lips"></view>
+    </view>
+    <view class="flex padding justify-center">
+      <view class="gradient-name">渐变调色盘</view>
+    </view>
+
+    <view class="grid text-center col-3">
+      <view wx:for="{{colorArr}}" wx:key="{{index}}">
+        <view class="flex justify-center">
+          <view class="gradient-icon" style="{{item.style}}"></view>
+        </view>
+        <view class="flex padding-top justify-center">
+          <view class="gradient-name">{{item.name}}</view>
+        </view>
+        <view class="flex padding-bottom justify-center">
+          <view class="gradient-name">{{item.color}}</view>
+        </view>
+      </view>
+    </view>
+  </view>

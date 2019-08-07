@@ -1,0 +1,26 @@
+@import "./style/main.wxss";
+@import "./style/guide.wxss";
+
+/**app.wxss**/
+.container {
+  height: 100vh;
+  background: #fff;
+} 
+
+button {
+  background: initial;
+}
+
+button:focus{
+  outline: 0;
+}
+
+button::after{
+  border: none;
+}
+
+
+page {
+  background: #fff;
+}
+

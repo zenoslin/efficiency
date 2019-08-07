@@ -1,0 +1,50 @@
+<view class="container average">
+  <view class="flex justify-center">
+    <view class="average-icon night_fade"></view>
+  </view>
+  <view class="flex padding justify-center">
+    <view class="average-name">拼单计算器</view>
+  </view>
+  <view class="width90">
+    <view wx:for="{{personInfo}}" wx:key="{{index}}" class="flex">
+      <view class="flex-sub margin-xs inputcard-name">
+        <icon class="inputcard-name-icon night_fade"></icon>
+        <text class="inputcard-name-text">用户{{index + 1}}</text>
+      </view>
+      <view class="flex-treble margin-xs solid inputcard-right">
+        <input class="inputcard-right-input" type="digit" data-id="{{index}}" bindblur="handleItemInput" placeholder="请输入金额" />
+      </view>
+    </view>
+  </view>
+  <view class="flex padding justify-around">
+    <view class="average-btn-person night_fade" bindtap="handleDecrease">
+      <view class="btn-text-decrease">-</view>
+    </view>
+    <view class="average-btn-person night_fade" bindtap="handleIncrease">
+      <view class="btn-text-increase">+</view>
+    </view>
+  </view>
+  <view class="width90">
+    <view class="flex">
+      <view class="flex-sub margin-xs inputcard-name">
+        <icon class="inputcard-name-icon night_fade"></icon>
+        <text class="inputcard-name-text">支出</text>
+      </view>
+      <view class="flex-treble margin-xs solid inputcard-right">
+        <input class="inputcard-right-input" type="digit" bindinput="handleCostInput" placeholder="请输入金额" />
+      </view>
+    </view>
+  </view>
+  <view class="flex margin-xs padding justify-center">
+    <button class="average-btn-confirm night_fade" bindtap="averageCost">计算</button>
+  </view>
+  <view class="width90">
+    <view wx:for="{{costInfo}}" wx:key="{{index}}" class="flex justify-center">
+      <view class="inputcard-name">
+        <text>
+          用户{{index + 1}}应支付¥{{item}}
+        </text>
+      </view>
+    </view>
+  </view>
+</view>

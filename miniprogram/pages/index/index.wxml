@@ -1,0 +1,20 @@
+<!-- index.wxml -->
+<view class="container">
+  <view class="appinfo" bindtap="handleAbout">
+    <view class="flex justify-center">
+      <view class="appinfo-icon warm_flame"></view>
+    </view>
+    <view class="flex padding justify-center">
+      <view class="appinfo-name">效率+</view>
+    </view>
+  </view>
+
+  <view class="flex justify-around">
+      <view class="card night_fade" bindtap="handleAverage">
+        <view class="card-name">拼单计算器</view>
+      </view>
+      <view class="card lady_lips" bindtap="handleGradient">
+        <view class="card-name">渐变配色盘</view>
+      </view>
+    </view>
+</view>

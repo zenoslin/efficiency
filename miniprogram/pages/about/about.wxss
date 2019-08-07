@@ -1,0 +1,21 @@
+.about-icon {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+}
+.about-name {
+  font-size: 26rpx;
+  color: #aaa;
+}
+.about-desc {
+  font-size: 26rpx;
+  color: #aaa;
+}
+.about-github {
+  font-size: 26rpx;
+  color: #aaa;
+}
+.about-email {
+  font-size: 26rpx;
+  color: #aaa;
+}

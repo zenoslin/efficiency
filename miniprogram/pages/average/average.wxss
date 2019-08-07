@@ -1,0 +1,80 @@
+.average-icon {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+}
+.average-name {
+  font-size: 26rpx;
+  color: #aaa;
+}
+
+.inputcard-name {
+  position: relative;
+  padding: 6rpx;
+  color: #a18cd1;
+}
+.inputcard-name-icon {
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  border-radius: 50%;
+}
+.inputcard-name-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  text-align: center;
+  font-size: 30rpx;
+  line-height: 15rpx;
+}
+.inputcard-right {
+  position: relative;
+  padding: 6rpx;
+  text-align: center;
+  border-radius: 36rpx;
+  color: #a18cd1;
+}
+.inputcard-right-input {
+  width: 100%;
+}
+
+.average-btn-person {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  border: 0;
+  position: relative;
+}
+.average-btn-confirm {
+  width: 300rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  color: #fff;
+  border-radius: 40rpx;
+  border: 0;
+}
+
+.width90 {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.btn-text-increase {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate3d(-50%, -50%, 0);
+  font-size: 80rpx;
+  color: #fff;
+}
+.btn-text-decrease {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate3d(-50%, -50%, 0);
+  font-size: 80rpx;
+  color: #fff;
+}
