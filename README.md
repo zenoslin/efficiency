@@ -18,13 +18,13 @@
 >
 > mpvue 的代码迁移到了[mpvue 分支](https://github.com/zenoslin/efficiency/tree/mpvue)
 
-![qrcode.png](https://github.com/zenoslin/efficiency/blob/master/img/qrcode.png)
+![qrcode.png](https://github.com/zenoslin/efficiency/blob/master/images/qrcode.png)
 
 ## Tools
 
 制作了一些（沙雕）的小工具，提高（我的）生活效率
 
-![index.png](https://github.com/zenoslin/efficiency/blob/master/img/index.png)
+![index.png](https://github.com/zenoslin/efficiency/blob/master/images/index.png)
 
 ### 拼单计算器
 
