@@ -1,16 +1,24 @@
 <!-- index.wxml -->
 <import src="../../template/head.wxml" />
-
 <view class="container">
   <view bindtap="handleAbout">
     <template is="head" data="{{...headInfo}}" />
   </view>
-  <view class="flex justify-around">
-    <view class="card night_fade" bindtap="handleAverage">
-      <view class="card-name">拼单计算器</view>
+  <view class="grid col-2">
+    <view class="padding">
+      <view class="card night_fade" bindtap="handleAverage">
+        <view class="card-name">拼单计算器</view>
+      </view>
     </view>
-    <view class="card lady_lips" bindtap="handleGradient">
-      <view class="card-name">渐变配色盘</view>
+    <view class="padding">
+      <view class="card lady_lips" bindtap="handleGradient">
+        <view class="card-name">渐变配色盘</view>
+      </view>
+    </view>
+    <view class="padding">
+      <view class="card tempting_azure" bindtap="handleTodos">
+        <view class="card-name">计划任务</view>
+      </view>
     </view>
   </view>
 </view>

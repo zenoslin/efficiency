@@ -2852,6 +2852,18 @@ scroll-view.cu-steps .cu-item {
 	flex: 3;
 }
 
+.flex-quadruple {
+	flex: 4;
+}
+
+.flex-quintuple {
+	flex: 5;
+}
+
+.flex-sextuple {
+	flex: 6;
+}
+
 .flex-direction {
 	flex-direction: column;
 }

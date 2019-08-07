@@ -43,27 +43,16 @@
 
 渐变配色方案来自[https://github.com/itmeo/webgradients](https://github.com/itmeo/webgradients)
 
+### 计划任务
+
+使用小程序云开发写的一个在线todolist，支持将任务在云端同步。
+
 ## Build
 
 ```bash
 # clone repository
 git clone https://github.com/zenoslin/efficiency.git
 cd efficiency
-
-# 指定平台的开发时构建(微信、百度、头条、支付宝)
-npm dev:wx
-npm dev:swan
-npm dev:tt
-npm dev:my
-
-# 指定平台的打包构建
-npm build:wx
-npm build:swan
-npm build:tt
-npm build:my
-
-# 生成 bundle 分析报告
-npm run build --report
 ```
 
 ## License

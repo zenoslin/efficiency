@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/about/about",
     "pages/average/average",
-    "pages/gradient/gradient"
+    "pages/gradient/gradient",
+    "pages/todos/todos"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -11,6 +12,12 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "效率+",
     "navigationBarTextStyle": "black"
+  },
+  "plugins": {
+    "WechatSI": {
+      "version": "0.3.0",
+      "provider": "wx069ba97219f66d99"
+    }
   },
   "sitemapLocation": "sitemap.json"
 }

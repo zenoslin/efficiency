@@ -1,5 +1,6 @@
 @import './style/main.wxss';
 @import './style/guide.wxss';
+@import './style/normal.wxss';
 
 /**模版css**/
 @import './template/head.wxss';

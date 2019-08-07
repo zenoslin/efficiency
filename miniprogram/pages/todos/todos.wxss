@@ -1,0 +1,55 @@
+.todos-box {
+  width: 420rpx;
+  height: 80rpx;
+  border: 1rpx solid #84faaf70;
+  border-radius: 40rpx;
+}
+.todos-box-input {
+  height: 100%;
+  margin: auto 5% auto 5%;
+  text-align: center;
+}
+.todos-box-input-placeholder {
+  font-style: italic;
+}
+
+.todos-list {
+  height: 60rpx;
+}
+.todos-list-left {
+  position: relative;
+}
+
+.todos-list-confirm {
+  width: 30px;
+  height: 30px;
+  border: 2rpx solid #84faaf;
+  border-radius: 50%;
+}
+
+.todos-list-activate {
+  width: 30px;
+  height: 30px;
+  background: #84faaf;
+  border: 2rpx solid #84faaf;
+  border-radius: 50%;
+}
+
+.todos-list-desc {
+  font-size: 30rpx;
+}
+
+.todos-list-right {
+  font-size: 48rpx;
+  font-family: inherit;
+  color: #cc9a9a;
+}
+
+.todos-btn-done {
+  width: 300rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  color: #fff;
+  border-radius: 40rpx;
+  border: 0;
+}

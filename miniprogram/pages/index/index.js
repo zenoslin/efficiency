@@ -31,5 +31,8 @@ Page({
   },
   handleGradient() {
     wx.navigateTo({ url: '../gradient/gradient' });
+  },
+  handleTodos() {
+    wx.navigateTo({ url: '../todos/todos' });
   }
 });

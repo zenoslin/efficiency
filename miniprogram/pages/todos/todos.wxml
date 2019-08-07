@@ -1,0 +1,42 @@
+<import src="../../template/head.wxml" />
+<view class="container">
+  <template is="head" data="{{...headInfo}}" />
+  <view class="flex margin justify-center">
+    <view class="todos-box">
+      <input class="todos-box-input" type="text" value="{{inputVal}}" bindconfirm="handleEnter" confirm-type="done" placeholder="What needs to be done?" placeholder-class="todos-box-input-placeholder" />
+    </view>
+  </view>
+  <view class="padding">
+    <block wx:for="{{todosList}}" wx:key="{{index}}">
+      <view class="flex margin-bottom text-center todos-list">
+        <view class="flex-sub flex align-center">
+          <button class="todos-list-confirm" data-id="{{item._id}}" bindtap="handleConfirm"></button>
+        </view>
+        <view class="flex-sextuple todos-list-desc flex align-center justify-center">
+          <text>{{item.description}}</text>
+        </view>
+        <view class="flex-sub todos-list-right flex align-center justify-center">
+          <text data-id="{{item._id}}" bindtap="handleCancel">X</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="flex margin justify-center">
+    <button class="todos-btn-done tempting_azure" bindtap="handleShowDone">{{btnDoneStr}}</button>
+  </view>
+  <view class="padding" hidden="{{isShowDone ? false : true}}">
+    <block wx:for="{{doneList}}" wx:key="{{index}}">
+      <view class="flex margin-bottom text-center todos-list">
+        <view class="flex-sub flex align-center">
+          <button class="todos-list-activate" data-id="{{item._id}}" bindtap="handleActivate"></button>
+        </view>
+        <view class="flex-sextuple todos-list-desc flex align-center justify-center">
+          <text>{{item.description}}</text>
+        </view>
+        <view class="flex-sub todos-list-right flex align-center justify-center">
+          <text data-id="{{item._id}}" bindtap="handleCancel">X</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
