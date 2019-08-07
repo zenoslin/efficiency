@@ -1,5 +1,9 @@
 Page({
   data: {
+    headInfo: {
+      class: 'night_fade',
+      name: '拼单计算器'
+    },
     personInfo: ['', '', ''],
     realCost: '',
     costInfo: []

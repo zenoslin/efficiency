@@ -3,6 +3,10 @@ const app = getApp();
 
 Page({
   data: {
+    headInfo: {
+      class: 'warm_flame',
+      name: '效率+'
+    },
     avatarUrl: './user-unlogin.png',
     userInfo: {},
     logged: false,
@@ -18,7 +22,7 @@ Page({
       return;
     }
   },
-  
+
   handleAbout() {
     wx.navigateTo({ url: '../about/about' });
   },

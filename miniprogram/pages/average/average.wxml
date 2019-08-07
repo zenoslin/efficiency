@@ -1,10 +1,6 @@
+<import src="../../template/head.wxml" />
 <view class="container average">
-  <view class="flex justify-center">
-    <view class="average-icon night_fade"></view>
-  </view>
-  <view class="flex padding justify-center">
-    <view class="average-name">拼单计算器</view>
-  </view>
+  <template is="head" data="{{...headInfo}}" />
   <view class="width90">
     <view wx:for="{{personInfo}}" wx:key="{{index}}" class="flex">
       <view class="flex-sub margin-xs inputcard-name">
@@ -41,9 +37,7 @@
   <view class="width90">
     <view wx:for="{{costInfo}}" wx:key="{{index}}" class="flex justify-center">
       <view class="inputcard-name">
-        <text>
-          用户{{index + 1}}应支付¥{{item}}
-        </text>
+        <text>用户{{index + 1}}应支付¥{{item}}</text>
       </view>
     </view>
   </view>

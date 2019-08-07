@@ -1,0 +1,11 @@
+<!-- head template -->
+<template name="head">
+  <view class="appinfo">
+    <view class="flex justify-center">
+      <view class="appinfo-icon {{class}}"></view>
+    </view>
+    <view class="flex padding justify-center">
+      <view class="appinfo-name">{{name}}</view>
+    </view>
+  </view>
+</template>

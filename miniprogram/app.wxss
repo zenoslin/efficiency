@@ -1,26 +1,29 @@
-@import "./style/main.wxss";
-@import "./style/guide.wxss";
+@import './style/main.wxss';
+@import './style/guide.wxss';
+
+/**模版css**/
+@import './template/head.wxss';
 
 /**app.wxss**/
 .container {
   height: 100vh;
+  position: relative;
   background: #fff;
-} 
+  font-family: 'PingFang-SC-Regular', 'SimSun', 'Microsoft Yahei';
+}
 
 button {
   background: initial;
 }
 
-button:focus{
+button:focus {
   outline: 0;
 }
 
-button::after{
+button::after {
   border: none;
 }
-
 
 page {
   background: #fff;
 }
-
