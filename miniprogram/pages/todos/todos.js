@@ -2,8 +2,9 @@ Page({
   data: {
     headInfo: {
       class: 'tempting_azure',
-      name: '计划任务Beta'
+      name: '计划任务'
     },
+    allList: [],
     inputVal: '',
     todosList: [],
     doneList: [],
@@ -12,15 +13,22 @@ Page({
   },
 
   onLoad() {
-    this.getUndoneList();
+    this.getAllItem();
   },
 
   handleEnter(event) {
     let desc = event.detail.value;
-    this.addItem(desc)
+    let options = {
+      description: desc,
+      start: new Date(),
+      done: false
+    };
+    this.addItem(options)
       .then(res => {
+        console.log('addSucc', res);
+        options._id = res._id;
+        this.addItemMock(options);
         this.setData({ inputVal: '' });
-        this.getUndoneList();
       })
       .catch(err => {
         console.log('fail', err);
@@ -32,8 +40,7 @@ Page({
     this.updateItemById(_id, { done: true })
       .then(res => {
         console.log('suss', res);
-        this.getUndoneList();
-        this.getDoneList();
+        this.updateItemMock(_id, true);
       })
       .catch(err => {
         console.log('fail', err);
@@ -45,8 +52,7 @@ Page({
     this.updateItemById(_id, { done: false })
       .then(res => {
         console.log('suss', res);
-        this.getUndoneList();
-        this.getDoneList();
+        this.updateItemMock(_id, false);
       })
       .catch(err => {
         console.log('fail', err);
@@ -58,8 +64,7 @@ Page({
     this.removeItemById(_id)
       .then(res => {
         console.log('succ', res);
-        this.getUndoneList();
-        this.getDoneList();
+        this.removeItemMock(_id);
       })
       .catch(err => {
         console.log('fail', err);
@@ -70,7 +75,6 @@ Page({
     let isShowDone = this.data.isShowDone;
     let str = '显示已完成任务';
     if (!isShowDone) {
-      this.getDoneList();
       str = '隐藏已完成任务';
     }
     this.setData({
@@ -79,50 +83,13 @@ Page({
     });
   },
 
-  // 获取未完成任务列表
-  getUndoneList() {
-    this.getItemByWhere({
-      done: false
-    })
-      .then(res => {
-        console.log('succ', res);
-        this.setData({
-          todosList: res.data
-        });
-      })
-      .catch(err => {
-        console.log('fail', err);
-        this.showNetworkToast();
-      });
-  },
-  // 获取已完成任务
-  getDoneList() {
-    this.getItemByWhere({
-      done: true
-    })
-      .then(res => {
-        console.log('succ', res);
-        this.setData({
-          doneList: res.data
-        });
-      })
-      .catch(err => {
-        console.log('fail', err);
-        this.showNetworkToast();
-      });
-  },
-
   // 添加任务
-  addItem: function(desc) {
+  addItem: function(options) {
     return new Promise((resolve, reject) => {
       const db = wx.cloud.database();
       db.collection('todos')
         .add({
-          data: {
-            description: desc,
-            start: new Date(),
-            done: false
-          }
+          data: options
         })
         .then(res => {
           resolve(res);
@@ -178,6 +145,89 @@ Page({
     });
   },
 
+  // 获取所有任务[云函数]
+  getAllItem() {
+    wx.cloud
+      .callFunction({
+        name: 'batch'
+      })
+      .then(res => {
+        console.log('succ', res);
+        this.setMockData(res.result.data);
+      })
+      .catch(err => {
+        console.log('fail', err);
+        this.showNetworkToast();
+      });
+  },
+
+  // 设置前端数据
+  setMockData(list) {
+    this.setData({
+      allList: list
+    });
+    this.separateList(list);
+  },
+  // 分离任务列表
+  separateList(list) {
+    let todosList = [];
+    let doneList = [];
+    list.map(item => {
+      if (item.done) {
+        doneList.push(item);
+      } else {
+        todosList.push(item);
+      }
+    });
+    this.setData({
+      todosList: todosList,
+      doneList: doneList
+    });
+  },
+  // 添加前端数据
+  addItemMock(options) {
+    let allList = this.data.allList;
+    allList.push(options);
+    this.setMockData(allList);
+  },
+  // 更新前端数据
+  updateItemMock(id, $boolean) {
+    let index = this.searchItemByIdMock(id);
+    if (index === -1) {
+      wx.showToast({
+        title: '数据操作错误',
+        icon: 'none'
+      });
+      return;
+    }
+    let allList = this.data.allList;
+    allList[index].done = $boolean;
+    this.setMockData(allList);
+  },
+  // 删除前端数据
+  removeItemMock(id) {
+    let index = this.searchItemByIdMock(id);
+    if (index === -1) {
+      wx.showToast({
+        title: '数据操作错误',
+        icon: 'none'
+      });
+      return;
+    }
+    let allList = this.data.allList;
+    allList.splice(index, 1);
+    this.setMockData(allList);
+  },
+  // 搜索数据
+  searchItemByIdMock(id) {
+    let allList = this.data.allList;
+    for (let i = 0; i < allList.length; i++) {
+      if (allList[i]._id === id) {
+        return i;
+      }
+    }
+    return -1;
+  },
   // 操作数据库错误通用提示
   showNetworkToast() {
     wx.showToast({
