@@ -22,17 +22,30 @@ Page({
       return;
     }
   },
+  onShareAppMessage: function() {
+    return {
+      title: '提高生活效率'
+    };
+  },
 
   handleAbout() {
-    wx.navigateTo({ url: '../about/about' });
+    wx.navigateTo({
+      url: '../about/about'
+    });
   },
   handleAverage() {
-    wx.navigateTo({ url: '../average/average' });
+    wx.navigateTo({
+      url: '../average/average'
+    });
   },
   handleGradient() {
-    wx.navigateTo({ url: '../gradient/gradient' });
+    wx.navigateTo({
+      url: '../gradient/gradient'
+    });
   },
   handleTodos() {
-    wx.navigateTo({ url: '../todos/todos' });
+    wx.navigateTo({
+      url: '../todos/todos'
+    });
   }
 });
