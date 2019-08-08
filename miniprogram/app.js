@@ -19,7 +19,6 @@ App({
   onHide: function() {
     wx.stopBackgroundAudio();
   },
-  globalData: {
-    translateHistory: []
-  }
+
+  globalData: {}
 });

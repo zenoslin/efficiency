@@ -9,7 +9,7 @@
   <view class="padding">
     <block wx:for="{{todosList}}" wx:key="{{index}}">
       <view class="flex margin-bottom text-center todos-list">
-        <view class="flex-sub flex align-center">
+        <view class="flex-sub flex align-center justify-center">
           <button class="todos-list-confirm" data-id="{{item._id}}" bindtap="handleConfirm"></button>
         </view>
         <view class="flex-sextuple todos-list-desc flex align-center justify-center">
@@ -31,7 +31,7 @@
           <button class="todos-list-activate" data-id="{{item._id}}" bindtap="handleActivate"></button>
         </view>
         <view class="flex-sextuple todos-list-desc flex align-center justify-center">
-          <text>{{item.description}}</text>
+          <text class="todos-list-donetext">{{item.description}}</text>
         </view>
         <view class="flex-sub todos-list-right flex align-center justify-center">
           <text data-id="{{item._id}}" bindtap="handleCancel">X</text>

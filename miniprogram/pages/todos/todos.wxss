@@ -14,22 +14,24 @@
 }
 
 .todos-list {
-  height: 60rpx;
+  min-height: 60rpx;
 }
 .todos-list-left {
   position: relative;
 }
 
 .todos-list-confirm {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
+  padding: 0;
   border: 2rpx solid #84faaf;
   border-radius: 50%;
 }
 
 .todos-list-activate {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
+  padding: 0;
   background: #84faaf;
   border: 2rpx solid #84faaf;
   border-radius: 50%;
@@ -52,4 +54,9 @@
   color: #fff;
   border-radius: 40rpx;
   border: 0;
+}
+
+.todos-list-donetext {
+  color: #aaa;
+  text-decoration: line-through;
 }
