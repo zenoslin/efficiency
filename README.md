@@ -8,7 +8,7 @@
 
 这是一个简单的小程序，本意是制作一些小工具来提高生活效率，方便日常使用。
 
-技术栈`原生小程序` `微信云开发`，其中部分样式使用了[colorUI](https://github.com/weilanwl/ColorUI)和[WebGradients](https://github.com/itmeo/webgradients)。
+技术栈`原生小程序` `微信云开发`，其中部分样式使用了[colorUI](https://github.com/weilanwl/ColorUI)。
 
 > 第一版使用了 mpvue，但是开发过程出现了不支持 vue 某些语法，没有文档的情况下排查错误耗费了大量时间。
 >
@@ -41,7 +41,7 @@
 
 这是一个华而不实的配色工具，你可以看到很多渐变配色在手机上的效果与具体色值
 
-渐变配色方案来自[https://github.com/itmeo/webgradients](https://github.com/itmeo/webgradients)
+渐变配色方案来自[WebGradients](https://github.com/itmeo/webgradients)
 
 ### 计划任务
 
