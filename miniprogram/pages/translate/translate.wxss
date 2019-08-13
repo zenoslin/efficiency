@@ -1,3 +1,38 @@
+.translate-edit {
+  width: 560rpx;
+  height: 240rpx;
+  padding: 5%;
+  border: 1rpx solid #d57eeb;
+  border-radius: 20rpx;
+}
+.translate-edit-area {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+}
+.translate-edit-area-placeholder {
+  font-style: italic;
+}
+
+.translate-result {
+  width: 560rpx;
+}
+.translate-result-text {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+}
+
+.translate-btn-translate {
+  width: 240rpx;
+  height: 100rpx;
+  font-size: 30rpx;
+  line-height: 100rpx;
+  color: #fff;
+  border-radius: 50rpx;
+  border: 0;
+}
+
 .foot-group {
   position: fixed;
   left: 0;

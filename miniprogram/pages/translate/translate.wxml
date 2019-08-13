@@ -1,6 +1,39 @@
+<import src="../../template/head.wxml" />
 <view class="container">
-  <button bindtap="handleTranslate">翻译</button>
-  <view class="foot-group" catchlongpress="catchTagEvent">
+  <template is="head" data="{{...headInfo}}" />
+  <form bindsubmit="handleTranslate">
+    <view class="flex margin justify-center">
+      <view class="translate-edit">
+          <textarea
+            class="translate-edit-area"
+            name="input"
+            type="text"
+            value="{{inputVal}}"
+            bindblur="setAreaText"
+            placeholder="输入文字或者语音输入..."
+            placeholder-class="translate-edit-area-placeholder"
+          ></textarea>
+      </view>
+    </view>
+    <view class="flex margin justify-center">
+      <view class="translate-result">
+        <text class="translate-result-text">{{resultVal}}</text>
+      </view>
+    </view>
+    <view class="flex padding justify-around">
+      <button 
+        class="translate-btn-translate mean_fruit"
+        form-type="submit"
+        data-type="CN"
+      >中文翻译</button>
+      <button
+        class="translate-btn-translate mean_fruit"
+        form-type="submit"
+        data-type="EN"
+      >EN Translate</button>
+    </view>
+  </form>
+  <!-- <view class="foot-group" catchlongpress="catchTagEvent">
     <bottom-button button-disabled="{{bottomButtonDisabled}}" bindrecordstart="streamRecord" bindrecordend="streamRecordEnd"></bottom-button>
-  </view>
+  </view> -->
 </view>

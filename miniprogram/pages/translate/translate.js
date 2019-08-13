@@ -9,6 +9,15 @@ const manager = plugin.getRecordRecognitionManager();
 
 Page({
   data: {
+    headInfo: {
+      class: 'mean_fruit',
+      name: '语音翻译'
+    },
+
+    inputVal: '', //输入文本
+    resultVal: '', //结果文本
+    translating: false, //是否翻译中
+
     recording: false,
     recordStatus: 0, // status: 0-录音中 1-翻译中 2-完成翻译/二次翻译
     currentTranslate: {
@@ -26,6 +35,13 @@ Page({
     toView: 'fake', // 滚动位置
     lastId: -1, // dialogList 最后一个item的 id
     currentTranslateVoice: '' // 当前播放语音路径
+  },
+
+  setAreaText: function(event) {
+    let text = event.detail.value;
+    this.setData({
+      inputVal: text
+    });
   },
 
   /**
@@ -73,6 +89,73 @@ Page({
   },
 
   /**
+   * 翻译
+   */
+  handleTranslate: function(event) {
+    if (!this.data.translating) {
+      this.setData({
+        resultVal: '正在翻译...',
+        translating: true
+      });
+      let text = event.detail.value.input;
+      if (text === '') {
+        this.setData({
+          resultVal: '输入不能为空',
+          translating: false
+        });
+        return;
+      }
+      let isCN = event.detail.target.dataset.type === 'CN';
+      let lfrom = isCN ? 'zh_CN' : 'en_US';
+      let lto = isCN ? 'en_US' : 'zh_CN';
+      this.translateText(lfrom, lto, text);
+    }
+  },
+
+  /**
+   * 翻译文字
+   */
+  translateText: function(from, to, text) {
+    plugin.translate({
+      lfrom: from,
+      lto: to,
+      content: text,
+      tts: true,
+      success: resTrans => {
+        console.log('success', resTrans);
+
+        let passRetcode = [
+          0, // 翻译合成成功
+          -10006, // 翻译成功，合成失败
+          -10007, // 翻译成功，传入了不支持的语音合成语言
+          -10008 // 翻译成功，语音合成达到频率限制
+        ];
+
+        if (passRetcode.indexOf(resTrans.retcode) >= 0) {
+          this.setData({
+            resultVal: resTrans.result
+          });
+        } else {
+          this.setData({
+            resultVal: '翻译失败!'
+          });
+        }
+      },
+      fail: resTrans => {
+        console.log('fail', resTrans);
+        this.setData({
+          resultVal: '翻译失败!'
+        });
+      },
+      complete: resTrans => {
+        this.setData({
+          translating: false
+        });
+      }
+    });
+  },
+
+  /**
    * 初始化语音识别回调
    * 绑定语音播放开始事件
    */
@@ -113,7 +196,6 @@ Page({
       });
 
       console.log('currentData', currentData);
-      this.translateText(currentData, this.data.dialogList.length);
     };
     //识别错误事件
     manager.onError = res => {
@@ -135,82 +217,60 @@ Page({
     });
   },
 
-  translateText: function(item, index) {
-    let lfrom = item.lfrom || 'zh_CN';
-    let lto = item.lto || 'en_US';
+  // translateText: function(item, index) {
+  //   let lfrom = item.lfrom || 'zh_CN';
+  //   let lto = item.lto || 'en_US';
 
-    plugin.translate({
-      lfrom: lfrom,
-      lto: lto,
-      content: item.text,
-      tts: true,
-      success: resTrans => {
-        let passRetcode = [
-          0, // 翻译合成成功
-          -10006, // 翻译成功，合成失败
-          -10007, // 翻译成功，传入了不支持的语音合成语言
-          -10008 // 翻译成功，语音合成达到频率限制
-        ];
+  //   plugin.translate({
+  //     lfrom: lfrom,
+  //     lto: lto,
+  //     content: item.text,
+  //     tts: true,
+  //     success: resTrans => {
+  //       let passRetcode = [
+  //         0, // 翻译合成成功
+  //         -10006, // 翻译成功，合成失败
+  //         -10007, // 翻译成功，传入了不支持的语音合成语言
+  //         -10008 // 翻译成功，语音合成达到频率限制
+  //       ];
 
-        if (passRetcode.indexOf(resTrans.retcode) >= 0) {
-          let tmpDialogList = this.data.dialogList.slice(0);
-          if (!isNaN(index)) {
-            let tmpTranslate = Object.assign({}, item, {
-              autoPlay: true, // 自动播放背景音乐
-              translateText: resTrans.result,
-              translateVoicePath: resTrans.filename || '',
-              translateVoiceExpiredTime: resTrans.expired_time || 0
-            });
+  //       if (passRetcode.indexOf(resTrans.retcode) >= 0) {
+  //         let tmpDialogList = this.data.dialogList.slice(0);
+  //         if (!isNaN(index)) {
+  //           let tmpTranslate = Object.assign({}, item, {
+  //             autoPlay: true, // 自动播放背景音乐
+  //             translateText: resTrans.result,
+  //             translateVoicePath: resTrans.filename || '',
+  //             translateVoiceExpiredTime: resTrans.expired_time || 0
+  //           });
 
-            tmpDialogList[index] = tmpTranslate;
+  //           tmpDialogList[index] = tmpTranslate;
 
-            this.setData({
-              dialogList: tmpDialogList,
-              bottomButtonDisabled: false,
-              recording: false
-            });
-          } else {
-            console.error('index error', resTrans, item);
-          }
-        } else {
-          console.warn('翻译失败', resTrans, item);
-        }
-      },
-      fail: function(resTrans) {
-        console.error('调用失败', resTrans, item);
-        this.setData({
-          bottomButtonDisabled: false,
-          recording: false
-        });
-      },
-      complete: resTrans => {
-        this.setData({ recordStatus: 1 });
-        wx.hideLoading();
-      }
-    });
-  },
-
-  handleTranslate: function() {
-    let lfrom = 'zh_CN';
-    let lto = 'en_US';
-    let testText = '你变秃也变强了';
-
-    plugin.translate({
-      lfrom: lfrom,
-      lto: lto,
-      content: testText,
-      tts: true,
-      success: resTrans => {
-        console.log('success', resTrans);
-      },
-      fail: resTrans => {
-        console.log('fail', resTrans);
-      },
-      complete: resTrans => {
-        console.log('complete', resTrans);
-      }
-    });
-  },
+  //           this.setData({
+  //             dialogList: tmpDialogList,
+  //             bottomButtonDisabled: false,
+  //             recording: false
+  //           });
+  //         } else {
+  //           console.error('index error', resTrans, item);
+  //         }
+  //       } else {
+  //         console.warn('翻译失败', resTrans, item);
+  //       }
+  //     },
+  //     fail: function(resTrans) {
+  //       console.error('调用失败', resTrans, item);
+  //       this.setData({
+  //         bottomButtonDisabled: false,
+  //         recording: false
+  //       });
+  //     },
+  //     complete: resTrans => {
+  //       this.setData({ recordStatus: 1 });
+  //       wx.hideLoading();
+  //     }
+  //   });
+  // },
 
   onLoad: function() {
     this.initRecord();

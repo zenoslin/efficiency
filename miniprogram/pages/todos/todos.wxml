@@ -3,7 +3,15 @@
   <template is="head" data="{{...headInfo}}" />
   <view class="flex margin justify-center">
     <view class="todos-box">
-      <input class="todos-box-input" type="text" value="{{inputVal}}" bindconfirm="handleEnter" confirm-type="done" placeholder="What needs to be done?" placeholder-class="todos-box-input-placeholder" />
+      <input 
+        class="todos-box-input"
+        type="text"
+        value="{{inputVal}}"
+        bindconfirm="handleEnter"
+        confirm-type="done"
+        placeholder="What needs to be done?"
+        placeholder-class="todos-box-input-placeholder"
+      />
     </view>
   </view>
   <view class="padding">
