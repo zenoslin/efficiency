@@ -4,15 +4,7 @@
   <form bindsubmit="handleTranslate">
     <view class="flex margin justify-center">
       <view class="translate-edit">
-          <textarea
-            class="translate-edit-area"
-            name="input"
-            type="text"
-            value="{{inputVal}}"
-            bindblur="setAreaText"
-            placeholder="输入文字或者语音输入..."
-            placeholder-class="translate-edit-area-placeholder"
-          ></textarea>
+        <textarea class="translate-edit-area" name="input" type="text" value="{{inputVal}}" bindblur="setAreaText" placeholder="输入文字或者语音输入..." placeholder-class="translate-edit-area-placeholder"></textarea>
       </view>
     </view>
     <view class="flex margin justify-center">
@@ -20,17 +12,37 @@
         <text class="translate-result-text">{{resultVal}}</text>
       </view>
     </view>
-    <view class="flex padding justify-around">
-      <button 
-        class="translate-btn-translate mean_fruit"
-        form-type="submit"
-        data-type="CN"
-      >中文翻译</button>
-      <button
-        class="translate-btn-translate mean_fruit"
-        form-type="submit"
-        data-type="EN"
-      >EN Translate</button>
+    <view class="foot-group">
+      <view class="flex padding justify-around">
+        <button
+          class="translate-btn-translate mean_fruit"
+          form-type="submit"
+          data-type="CN">
+          中文翻译
+        </button>
+        <button
+          class="translate-btn-translate mean_fruit"
+          form-type="submit"
+          data-type="EN">
+          EN Translate
+        </button>
+      </view>
+      <view class="flex padding justify-around">
+        <button
+          class="translate-btn-translate mean_fruit"
+          catchtouchstart="streamRecord"
+          catchtouchend="streamRecordEnd"
+          data-type="CN">
+          按住说话
+        </button>
+        <button
+          class="translate-btn-translate mean_fruit"
+          catchtouchstart="streamRecord"
+          catchtouchend="streamRecordEnd"
+          data-type="EN">
+          Hold To Talk
+        </button>
+      </view>
     </view>
   </form>
   <!-- <view class="foot-group" catchlongpress="catchTagEvent">

@@ -49,22 +49,21 @@ Page({
    */
   streamRecord: function(event) {
     console.log('streamRecord', event);
-    let detail = event.detail || {};
-    let buttonItem = detail.buttonItem || {};
+    let lang = event.target.dataset.type === 'CN' ? 'zh_CN' : 'en_US';
     manager.start({
-      lang: buttonItem.lang
+      lang: lang
     });
 
     this.setData({
       recordStatus: 0,
-      recording: true,
-      currentTranslate: {
-        // 当前语音输入内容
-        create: dateUtil.recordTime(new Date()),
-        text: '正在聆听中',
-        lfrom: buttonItem.lang,
-        lto: buttonItem.lto
-      }
+      recording: true
+      // currentTranslate: {
+      //   // 当前语音输入内容
+      //   create: dateUtil.recordTime(new Date()),
+      //   text: '正在聆听中',
+      //   lfrom: buttonItem.lang,
+      //   lto: buttonItem.lto
+      // }
     });
     // this.scrollToNew();
   },
@@ -85,7 +84,7 @@ Page({
     }
 
     manager.stop();
-    this.setData({ bottomButtonDisabled: true });
+    // this.setData({ bottomButtonDisabled: true });
   },
 
   /**
@@ -192,7 +191,8 @@ Page({
       this.setData({
         currentTranslate: currentData,
         recordStatus: 1,
-        lastId: lastId
+        lastId: lastId,
+        inputVal: res.result 
       });
 
       console.log('currentData', currentData);
