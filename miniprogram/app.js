@@ -5,20 +5,40 @@ App({
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');
     } else {
       wx.cloud.init({
-        // env 参数说明：
-        //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
-        //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
-        //   如不填则使用默认环境（第一个创建的环境）
         env: 'efficiency-mrvib',
         traceUser: true
       });
     }
-
-    this.globalData = {};
+  },
+  // 权限询问
+  getRecordAuth: function() {
+    wx.getSetting({
+      success(res) {
+        console.log('succ', res);
+        if (!res.authSetting['scope.record']) {
+          wx.authorize({
+            scope: 'scope.record',
+            success() {
+              console.log('succ auth');
+            },
+            fail() {
+              console.log('fail auth');
+            }
+          });
+        } else {
+          console.log('record has been authed');
+        }
+      },
+      fail(res) {
+        console.log('fail', res);
+      }
+    });
   },
   onHide: function() {
     wx.stopBackgroundAudio();
   },
 
-  globalData: {}
+  globalData: {
+    history: []
+  }
 });

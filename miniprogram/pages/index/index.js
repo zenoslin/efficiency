@@ -47,5 +47,10 @@ Page({
     wx.navigateTo({
       url: '../todos/todos'
     });
+  },
+  handleTranslate() {
+    wx.navigateTo({
+      url: '../translate/translate'
+    });
   }
 });

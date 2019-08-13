@@ -20,5 +20,10 @@
         <view class="card-name">计划任务</view>
       </view>
     </view>
+    <view class="padding">
+      <view class="card mean_fruit" bindtap="handleTranslate">
+        <view class="card-name">语音翻译</view>
+      </view>
+    </view>
   </view>
 </view>

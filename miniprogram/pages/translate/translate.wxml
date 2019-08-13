@@ -1,0 +1,6 @@
+<view class="container">
+  <button bindtap="handleTranslate">翻译</button>
+  <view class="foot-group" catchlongpress="catchTagEvent">
+    <bottom-button button-disabled="{{bottomButtonDisabled}}" bindrecordstart="streamRecord" bindrecordend="streamRecordEnd"></bottom-button>
+  </view>
+</view>
