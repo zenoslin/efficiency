@@ -18,13 +18,13 @@
 >
 > mpvue 的代码迁移到了[mpvue 分支](https://github.com/zenoslin/efficiency/tree/mpvue)
 
-![qrcode.png](https://github.com/zenoslin/efficiency/blob/master/images/qrcode.png)
+![qrcode.png](./images/qrcode.png)
 
 ## Tools
 
 制作了一些（沙雕）的小工具，提高（我的）生活效率
 
-![index.png](https://github.com/zenoslin/efficiency/blob/master/images/index.png)
+![index.jpeg](./images/index.jpeg)
 
 ### 拼单计算器
 
@@ -45,7 +45,11 @@
 
 ### 计划任务
 
-使用小程序云开发写的一个在线todolist，支持将任务在云端同步。
+使用小程序云开发写的一个在线 todolist，支持将任务在云端同步。
+
+### 语音翻译
+
+base[微信同声传译](https://developers.weixin.qq.com/miniprogram/dev/extended/service/translator.html)的插件，实现打字输入和语音输入的翻译功能，支持 zh_CN 和 en_US。
 
 ## Build
 
