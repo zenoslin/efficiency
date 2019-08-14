@@ -17,7 +17,10 @@ Page({
     recording: false, //录音中
     recordStatus: 0, // status: 0-初始值/完成翻译 1-录音中 2-翻译中
     recordType: 0, // 默认0-zh_CN 1-en_US
-    translateVoice: '' //语音路径
+    translateVoice: '', //语音路径
+
+    btnCNCss: 'mean_fruit', //按钮样式 默认'mean_fruit' 按下'amy_crisp'
+    btnENCss: 'mean_fruit' //按钮样式 默认'mean_fruit' 按下'amy_crisp'
   },
 
   setAreaText: function(event) {
@@ -47,6 +50,15 @@ Page({
       lang: lang
     });
 
+    if (isCN) {
+      this.setData({
+        btnCNCss: 'amy_crisp'
+      });
+    } else {
+      this.setData({
+        btnENCss: 'amy_crisp'
+      });
+    }
     // this.scrollToNew();
   },
 
@@ -61,8 +73,19 @@ Page({
       console.warn('has finished!');
       return;
     }
-
+    
     manager.stop();
+
+    let isCN = event.target.dataset.type === 'CN';
+    if (isCN) {
+      this.setData({
+        btnCNCss: 'mean_fruit'
+      });
+    } else {
+      this.setData({
+        btnENCss: 'mean_fruit'
+      });
+    }
   },
 
   /**
@@ -85,6 +108,7 @@ Page({
       });
       return;
     }
+    console.log('text', text);
     let isCN = event.detail.target.dataset.type === 'CN';
     let lfrom = isCN ? 'zh_CN' : 'en_US';
     let lto = isCN ? 'en_US' : 'zh_CN';
@@ -176,7 +200,11 @@ Page({
       let text = res.result;
       if (text === '') {
         this.setData({
-          inputVal: ''
+          inputVal: '',
+          resultVal: '请重新输入',
+          translating: false,
+          recording: false,
+          recordStatus: 0
         });
         return;
       }
@@ -195,6 +223,7 @@ Page({
     manager.onError = res => {
       console.log('onError', res);
       this.setData({
+        resultVal: '语音识别错误，请重新输入...',
         recording: false,
         recordStatus: 0
       });

@@ -25,10 +25,10 @@
         </button>
       </view>
       <view class="flex padding-bottom justify-around">
-        <button class="translate-btn-translate mean_fruit" catchtouchstart="streamRecord" catchtouchend="streamRecordEnd" data-type="CN">
+        <button class="translate-btn-translate {{btnCNCss}}" bindtouchstart="streamRecord" bindtouchend="streamRecordEnd" data-type="CN">
           按住说话
         </button>
-        <button class="translate-btn-translate mean_fruit" catchtouchstart="streamRecord" catchtouchend="streamRecordEnd" data-type="EN">
+        <button class="translate-btn-translate {{btnENCss}}" bindtouchstart="streamRecord" bindtouchend="streamRecordEnd" data-type="EN">
           Hold To Talk
         </button>
       </view>
