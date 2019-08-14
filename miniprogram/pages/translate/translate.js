@@ -1,8 +1,5 @@
 const app = getApp();
-const dateUtil = require('../../utils/dateUtil');
 const plugin = requirePlugin('WechatSI');
-
-import { language } from '../../utils/conf';
 
 // 获取**全局唯一**的语音识别管理器**recordRecoManager**
 const manager = plugin.getRecordRecognitionManager();
@@ -17,24 +14,10 @@ Page({
     inputVal: '', //输入文本
     resultVal: '', //结果文本
     translating: false, //是否翻译中
-
-    recording: false,
-    recordStatus: 0, // status: 0-录音中 1-翻译中 2-完成翻译/二次翻译
-    currentTranslate: {
-      //当前语音输入的内容
-      create: '08/13 11:41',
-      text: '等待说话'
-    },
-
-    bottomButtonDisabled: false, // 底部按钮disabled
-
-    dialogList: [],
-
-    tips_language: language[0], // 目前只有中文
-
-    toView: 'fake', // 滚动位置
-    lastId: -1, // dialogList 最后一个item的 id
-    currentTranslateVoice: '' // 当前播放语音路径
+    recording: false, //录音中
+    recordStatus: 0, // status: 0-初始值/完成翻译 1-录音中 2-翻译中
+    recordType: 0, // 默认0-zh_CN 1-en_US
+    translateVoice: '' //语音路径
   },
 
   setAreaText: function(event) {
@@ -48,23 +31,22 @@ Page({
    * 按住按钮开始语音识别
    */
   streamRecord: function(event) {
+    if (this.data.recordStatus !== 0) return; // 有执行中的动作
+
     console.log('streamRecord', event);
-    let lang = event.target.dataset.type === 'CN' ? 'zh_CN' : 'en_US';
+    let isCN = event.target.dataset.type === 'CN';
+    let lang = isCN ? 'zh_CN' : 'en_US';
+    let type = isCN ? 0 : 1;
+    this.setData({
+      recordStatus: 1,
+      recording: true,
+      resultVal: '正在录音...',
+      recordType: type
+    });
     manager.start({
       lang: lang
     });
 
-    this.setData({
-      recordStatus: 0,
-      recording: true
-      // currentTranslate: {
-      //   // 当前语音输入内容
-      //   create: dateUtil.recordTime(new Date()),
-      //   text: '正在聆听中',
-      //   lfrom: buttonItem.lang,
-      //   lto: buttonItem.lto
-      // }
-    });
     // this.scrollToNew();
   },
 
@@ -74,41 +56,58 @@ Page({
   streamRecordEnd: function(event) {
     console.log('streamRecordEnd', event);
 
-    let detail = event.detail || {}; // 自定义组件触发事件时提供的detail对象
-    let buttonItem = detail.buttonItem || {};
-
     // 防止重复触发stop函数
-    if (!this.data.recording || this.data.recordStatus != 0) {
+    if (!this.data.recording || this.data.recordStatus != 1) {
       console.warn('has finished!');
       return;
     }
 
     manager.stop();
-    // this.setData({ bottomButtonDisabled: true });
   },
 
   /**
    * 翻译
    */
   handleTranslate: function(event) {
-    if (!this.data.translating) {
+    if (this.data.recordStatus !== 0) return; // 有执行中的动作
+
+    this.setData({
+      resultVal: '正在翻译...',
+      translating: true
+    });
+    let text = event.detail.value.input;
+    if (text === '') {
       this.setData({
-        resultVal: '正在翻译...',
-        translating: true
+        resultVal: '输入不能为空',
+        translating: false,
+        recordStatus: 0,
+        translateVoice: ''
       });
-      let text = event.detail.value.input;
-      if (text === '') {
-        this.setData({
-          resultVal: '输入不能为空',
-          translating: false
-        });
-        return;
-      }
-      let isCN = event.detail.target.dataset.type === 'CN';
-      let lfrom = isCN ? 'zh_CN' : 'en_US';
-      let lto = isCN ? 'en_US' : 'zh_CN';
-      this.translateText(lfrom, lto, text);
+      return;
     }
+    let isCN = event.detail.target.dataset.type === 'CN';
+    let lfrom = isCN ? 'zh_CN' : 'en_US';
+    let lto = isCN ? 'en_US' : 'zh_CN';
+    this.translateText(lfrom, lto, text);
+  },
+
+  handlePlayVoice: function() {
+    if (this.data.translateVoice === '') {
+      wx.showToast({
+        title: '暂时没有音频',
+        icon: 'none'
+      });
+      return;
+    }
+
+    const backgroundAudioManager = wx.getBackgroundAudioManager();
+    if (!backgroundAudioManager.paused) {
+      // 停止之前的音频播放
+      backgroundAudioManager.stop();
+    }
+    // 当设置了新的 src 时，会自动开始播放
+    backgroundAudioManager.title = '语音识别';
+    backgroundAudioManager.src = this.data.translateVoice;
   },
 
   /**
@@ -132,23 +131,27 @@ Page({
 
         if (passRetcode.indexOf(resTrans.retcode) >= 0) {
           this.setData({
-            resultVal: resTrans.result
+            translating: false,
+            recordStatus: 0,
+            resultVal: resTrans.result,
+            translateVoice: resTrans.filename
           });
         } else {
           this.setData({
-            resultVal: '翻译失败!'
+            translating: false,
+            recordStatus: 0,
+            resultVal: '翻译失败!',
+            translateVoice: ''
           });
         }
       },
       fail: resTrans => {
         console.log('fail', resTrans);
         this.setData({
-          resultVal: '翻译失败!'
-        });
-      },
-      complete: resTrans => {
-        this.setData({
-          translating: false
+          translating: false,
+          recordStatus: 0,
+          resultVal: '翻译失败!',
+          translateVoice: ''
         });
       }
     });
@@ -162,11 +165,8 @@ Page({
     // 有新的识别内容返回， 则会调用此事件
     manager.onRecognize = res => {
       console.log('onRecognize', res);
-      let currentData = Object.assign({}, this.data.currentTranslate, {
-        text: res.result
-      });
       this.setData({
-        currentTranslate: currentData
+        inputVal: res.result
       });
     };
     // 识别结束事件
@@ -175,106 +175,42 @@ Page({
 
       let text = res.result;
       if (text === '') {
-        // this.showRecordEmptyTip();
+        this.setData({
+          inputVal: ''
+        });
         return;
       }
-
-      let lastId = this.data.lastId + 1;
-
-      let currentData = Object.assign({}, this.data.currentTranslate, {
-        text: res.result,
-        translateText: '正在翻译中',
-        id: lastId,
-        voicePath: res.tempFilePath
-      });
-
       this.setData({
-        currentTranslate: currentData,
-        recordStatus: 1,
-        lastId: lastId,
-        inputVal: res.result 
+        resultVal: '正在翻译...',
+        translating: true,
+        recording: false,
+        recordStatus: 2
       });
 
-      console.log('currentData', currentData);
+      let lfrom = this.data.recordType === 0 ? 'zh_CN' : 'en_US';
+      let lto = this.data.recordType === 0 ? 'en_US' : 'zh_CN';
+      this.translateText(lfrom, lto, text);
     };
     //识别错误事件
     manager.onError = res => {
       console.log('onError', res);
       this.setData({
         recording: false,
-        bottomButtonDisabled: false
+        recordStatus: 0
       });
     };
 
-    // 语音播放开始事件
-    wx.onBackgroundAudioPlay(res => {
-      const backgroundAudioManager = wx.getBackgroundAudioManager();
-      let src = backgroundAudioManager.src;
-
-      this.setData({
-        currentTranslateVoice: src
+    const backgroundAudioManager = wx.getBackgroundAudioManager();
+    backgroundAudioManager.onError(function() {
+      wx.showToast({
+        title: '播放错误',
+        icon: 'none'
       });
     });
   },
 
-  // translateText: function(item, index) {
-  //   let lfrom = item.lfrom || 'zh_CN';
-  //   let lto = item.lto || 'en_US';
-
-  //   plugin.translate({
-  //     lfrom: lfrom,
-  //     lto: lto,
-  //     content: item.text,
-  //     tts: true,
-  //     success: resTrans => {
-  //       let passRetcode = [
-  //         0, // 翻译合成成功
-  //         -10006, // 翻译成功，合成失败
-  //         -10007, // 翻译成功，传入了不支持的语音合成语言
-  //         -10008 // 翻译成功，语音合成达到频率限制
-  //       ];
-
-  //       if (passRetcode.indexOf(resTrans.retcode) >= 0) {
-  //         let tmpDialogList = this.data.dialogList.slice(0);
-  //         if (!isNaN(index)) {
-  //           let tmpTranslate = Object.assign({}, item, {
-  //             autoPlay: true, // 自动播放背景音乐
-  //             translateText: resTrans.result,
-  //             translateVoicePath: resTrans.filename || '',
-  //             translateVoiceExpiredTime: resTrans.expired_time || 0
-  //           });
-
-  //           tmpDialogList[index] = tmpTranslate;
-
-  //           this.setData({
-  //             dialogList: tmpDialogList,
-  //             bottomButtonDisabled: false,
-  //             recording: false
-  //           });
-  //         } else {
-  //           console.error('index error', resTrans, item);
-  //         }
-  //       } else {
-  //         console.warn('翻译失败', resTrans, item);
-  //       }
-  //     },
-  //     fail: function(resTrans) {
-  //       console.error('调用失败', resTrans, item);
-  //       this.setData({
-  //         bottomButtonDisabled: false,
-  //         recording: false
-  //       });
-  //     },
-  //     complete: resTrans => {
-  //       this.setData({ recordStatus: 1 });
-  //       wx.hideLoading();
-  //     }
-  //   });
-  // },
-
   onLoad: function() {
     this.initRecord();
-
     app.getRecordAuth();
   }
 });

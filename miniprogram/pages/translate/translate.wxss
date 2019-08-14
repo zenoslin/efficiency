@@ -16,6 +16,7 @@
 
 .translate-result {
   width: 560rpx;
+  height: 240rpx;
 }
 .translate-result-text {
   width: 100%;

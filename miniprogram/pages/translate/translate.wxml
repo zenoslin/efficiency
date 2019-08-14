@@ -8,44 +8,30 @@
       </view>
     </view>
     <view class="flex margin justify-center">
-      <view class="translate-result">
+      <scroll-view class="translate-result" scroll-y="true">
         <text class="translate-result-text">{{resultVal}}</text>
-      </view>
+      </scroll-view>
+    </view>
+    <view class="flex margin justify-center" hidden="{{translateVoice===''?true: false}}">
+      <button class="translate-btn-translate mean_fruit" bindtap="handlePlayVoice">播放翻译</button>
     </view>
     <view class="foot-group">
-      <view class="flex padding justify-around">
-        <button
-          class="translate-btn-translate mean_fruit"
-          form-type="submit"
-          data-type="CN">
+      <view class="flex padding-bottom justify-around">
+        <button class="translate-btn-translate mean_fruit" form-type="submit" data-type="CN">
           中文翻译
         </button>
-        <button
-          class="translate-btn-translate mean_fruit"
-          form-type="submit"
-          data-type="EN">
+        <button class="translate-btn-translate mean_fruit" form-type="submit" data-type="EN">
           EN Translate
         </button>
       </view>
-      <view class="flex padding justify-around">
-        <button
-          class="translate-btn-translate mean_fruit"
-          catchtouchstart="streamRecord"
-          catchtouchend="streamRecordEnd"
-          data-type="CN">
+      <view class="flex padding-bottom justify-around">
+        <button class="translate-btn-translate mean_fruit" catchtouchstart="streamRecord" catchtouchend="streamRecordEnd" data-type="CN">
           按住说话
         </button>
-        <button
-          class="translate-btn-translate mean_fruit"
-          catchtouchstart="streamRecord"
-          catchtouchend="streamRecordEnd"
-          data-type="EN">
+        <button class="translate-btn-translate mean_fruit" catchtouchstart="streamRecord" catchtouchend="streamRecordEnd" data-type="EN">
           Hold To Talk
         </button>
       </view>
     </view>
   </form>
-  <!-- <view class="foot-group" catchlongpress="catchTagEvent">
-    <bottom-button button-disabled="{{bottomButtonDisabled}}" bindrecordstart="streamRecord" bindrecordend="streamRecordEnd"></bottom-button>
-  </view> -->
 </view>
