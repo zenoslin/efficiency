@@ -25,5 +25,10 @@
         <view class="card-name">语音翻译</view>
       </view>
     </view>
+    <view class="padding">
+      <view class="card deep_blue" bindtap="handleSoup">
+        <view class="card-name">毒鸡汤</view>
+      </view>
+    </view>
   </view>
 </view>

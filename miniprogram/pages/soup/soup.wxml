@@ -1,0 +1,6 @@
+<import src="../../template/head.wxml" />
+<view class="container soup">
+    <template is="head" data="{{...headInfo}}" />
+    <view class="soup-content">{{curSoup}}</view>
+    <button class="deep_blue soup-btn" bindtap="handleGetSoup">再来一碗</button>
+</view>

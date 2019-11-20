@@ -1,0 +1,22 @@
+.soup-content {
+    width: 72%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    text-align: center;
+}
+.soup-btn {
+    width: 240rpx;
+    height: 100rpx;
+    position: absolute;
+    bottom: 40rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30rpx;
+    line-height: 100rpx;
+    color: #fff;
+    border: 0;
+    border-radius: 50rpx;
+    z-index: 100;
+}

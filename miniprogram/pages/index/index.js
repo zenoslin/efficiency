@@ -52,5 +52,10 @@ Page({
     wx.navigateTo({
       url: '../translate/translate'
     });
+  },
+  handleSoup() {
+    wx.navigateTo({
+      url: '../soup/soup'
+    });
   }
 });
