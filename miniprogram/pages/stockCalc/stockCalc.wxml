@@ -19,7 +19,7 @@
   <view class="flex margin justify-center">
     <button class="stock-btn-done ripe_malinka" bindtap="handleCalc">计算区间</button>
   </view>
-  <view class="flex margin justify-center">
+  <view class="flex margin justify-center" hidden="{{!calcResult.isShow}}">
     <text class="stock-res">🚀 抛出价: {{calcResult.rise}}\n🏊 补仓价: {{calcResult.fall}}\n📈 抛出现价差: {{calcResult.rise2price}}%\n📉 补仓现价差: {{calcResult.fall2price}}%</text>
   </view>
 </view>
