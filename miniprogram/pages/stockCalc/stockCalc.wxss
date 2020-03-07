@@ -1,0 +1,28 @@
+.stock-box {
+  width: 420rpx;
+  height: 80rpx;
+  border: 1rpx solid #84faaf70;
+  border-radius: 40rpx;
+}
+.stock-box-input {
+  height: 100%;
+  margin: auto 5% auto 5%;
+  text-align: center;
+}
+.stock-box-input-placeholder {
+  font-style: italic;
+}
+
+.stock-btn-done {
+  width: 300rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  color: #fff;
+  border-radius: 40rpx;
+  border: 0;
+}
+.stock-res {
+  color: #476582;
+  font-size: 16px;
+  line-height: 24px;
+}

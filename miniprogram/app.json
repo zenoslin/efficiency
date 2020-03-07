@@ -5,7 +5,9 @@
     "pages/average/average",
     "pages/gradient/gradient",
     "pages/todos/todos",
-    "pages/translate/translate"
+    "pages/translate/translate",
+    "pages/soup/soup",
+    "pages/stockCalc/stockCalc"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

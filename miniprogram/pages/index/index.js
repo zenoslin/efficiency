@@ -57,5 +57,10 @@ Page({
     wx.navigateTo({
       url: '../soup/soup'
     });
+  },
+  handleStock() {
+    wx.navigateTo({
+      url: '../stockCalc/stockCalc'
+    });
   }
 });

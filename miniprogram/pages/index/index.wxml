@@ -30,5 +30,10 @@
         <view class="card-name">毒鸡汤</view>
       </view>
     </view>
+    <view class="padding">
+      <view class="card ripe_malinka" bindtap="handleStock">
+        <view class="card-name">股票计算器</view>
+      </view>
+    </view>
   </view>
 </view>
