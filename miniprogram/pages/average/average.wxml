@@ -2,7 +2,7 @@
 <view class="container average">
   <template is="head" data="{{...headInfo}}" />
   <view class="width90">
-    <view wx:for="{{personInfo}}" wx:key="{{index}}" class="flex">
+    <view wx:for="{{personInfo}}" wx:key="{{index}}" class="flex inputcard">
       <view class="flex-sub margin-xs inputcard-name">
         <icon class="inputcard-name-icon night_fade"></icon>
         <text class="inputcard-name-text">用户{{index + 1}}</text>
@@ -21,7 +21,7 @@
     </view>
   </view>
   <view class="width90">
-    <view class="flex">
+    <view class="flex inputcard">
       <view class="flex-sub margin-xs inputcard-name">
         <icon class="inputcard-name-icon night_fade"></icon>
         <text class="inputcard-name-text">支出</text>

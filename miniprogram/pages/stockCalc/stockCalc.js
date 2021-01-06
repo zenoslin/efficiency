@@ -2,7 +2,7 @@ Page({
   data: {
     headInfo: {
       class: 'ripe_malinka',
-      name: '股票计算器'
+      name: '止损计算器'
     },
     cost: '',
     price: '',

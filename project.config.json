@@ -1,49 +1,53 @@
 {
-	"miniprogramRoot": "miniprogram/",
-	"cloudfunctionRoot": "cloudfunctions/",
-	"setting": {
-		"urlCheck": true,
-		"es6": true,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"autoAudits": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		}
-	},
-	"appid": "wxc14defacb598a66e",
-	"projectname": "efficiency",
-	"libVersion": "2.2.5",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
-	"compileType": "miniprogram",
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"list": []
-		},
-		"miniprogram": {
-			"current": 0,
-			"list": []
-		}
-	}
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "autoAudits": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true
+  },
+  "appid": "wxc14defacb598a66e",
+  "projectname": "efficiency",
+  "libVersion": "2.2.5",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "compileType": "miniprogram",
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": []
+    }
+  }
 }

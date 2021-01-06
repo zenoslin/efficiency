@@ -39,18 +39,18 @@ Page({
     });
   },
   averageCost() {
-    let total = 0;
     let arr = [];
     let personArr = this.data.personInfo;
     let realCost = this.data.realCost;
     let isError = false;
-    personArr.map(item => {
-      total = total + parseInt(item);
-    });
+    let total = personArr.reduce(
+      (previousValue, currentValue) => (previousValue += +currentValue),
+      0
+    );
     for (let i = 0; i < personArr.length; i++) {
       arr[i] = this.getCostStr(
-        (parseInt(personArr[i]) / total) * parseInt(realCost),
-        function() {
+        (+personArr[i] / total) * +realCost,
+        function () {
           isError = true;
         }
       );

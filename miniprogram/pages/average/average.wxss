@@ -1,3 +1,6 @@
+.inputcard {
+  height: 96rpx;
+}
 .inputcard-name {
   position: relative;
   padding: 6rpx;
@@ -27,6 +30,9 @@
   text-align: center;
   border-radius: 36rpx;
   color: #a18cd1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .inputcard-right-input {
   width: 100%;
